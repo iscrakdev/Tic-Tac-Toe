@@ -8,7 +8,7 @@ for(let box of boxes) box.addEventListener('click', e => {
   imgO.src = "./assets/O.png";
   imgX.src = "./assets/X.png";
   
-  if(isAvailable(box)) {
+  if(isAvailable(box) && gameStatus() === 'active') {
     if(lastMove === 'x') {
       box.append(imgO);
       lastMove = 'o';
@@ -31,4 +31,5 @@ function gameStatus() {
   // else if all squares occupied, game is draw
   // else game is still active
   // return winner, draw, or active
+  return 'active'
 }
