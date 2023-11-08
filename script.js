@@ -7,7 +7,7 @@ for(let box of boxes) box.addEventListener('click', e => {
   const box = e.target;
   imgO.src = "./assets/O.png";
   imgX.src = "./assets/X.png";
-
+  
   if(isAvailable(box)) {
     if(lastMove === 'o') {
       box.append(imgX);
@@ -21,7 +21,7 @@ for(let box of boxes) box.addEventListener('click', e => {
 })
 
 function isAvailable(box) {
-  return box.children.length ? true : false
+  return box.parentNode.id === "main" ? true : false;
 }
 
 function gameStatus() {
