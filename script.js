@@ -9,12 +9,12 @@ for(let box of boxes) box.addEventListener('click', e => {
   imgX.src = "./assets/X.png";
   
   if(isAvailable(box)) {
-    if(lastMove === 'o') {
-      box.append(imgX);
-      lastMove = 'x';
-    } else {
+    if(lastMove === 'x') {
       box.append(imgO);
       lastMove = 'o';
+    } else {
+      box.append(imgX);
+      lastMove = 'x';
     }
   } 
 
