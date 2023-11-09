@@ -1,4 +1,5 @@
 const boxes = document.getElementsByClassName("box");
+let occupied = 0;
 
 function addListeners() {
   let currentMove = true;
@@ -19,6 +20,7 @@ function addListeners() {
         }
         box.classList.remove("playable");
         currentMove = !currentMove;
+        occupied++;
 
         let gameState = gameStatus();
         if (gameState === "winner") {
@@ -39,10 +41,18 @@ function isAvailable(box) {
 function gameStatus() {
   let gameState = "active";
   const boxArray = [
-    [boxes[0], boxes[1], boxes[2]],
-    [boxes[3], boxes[4], boxes[5]],
-    [boxes[6], boxes[7], boxes[8]],
+    [boxes[0].firstChild, boxes[1].firstChild, boxes[2].firstChild],
+    [boxes[3].firstChild, boxes[4].firstChild, boxes[5].firstChild],
+    [boxes[6].firstChild, boxes[7].firstChild, boxes[8].firstChild],
   ];
+
+  for(let row of boxArray) {
+    if(row[0] && row[0] === row[1] && row[0] === row[2]) {
+      return "winner";
+    } 
+  } 
+
+
   // for each space
   /* for the given box */
   // check horizontal, vertical and diagonal neighbors
@@ -60,7 +70,9 @@ function gameStatus() {
 function resetGame() {
   for (let box of boxes) {
     box.classList.add("playable");
+    if(box.firstChild) box.removeChild(box.firstChild)
   }
+  occupied = 0;
 }
 
 resetGame();
