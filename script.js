@@ -47,6 +47,9 @@ function gameStatus() {
   for (let row of boxArray) {
     if (row[0] && row[1] && row[2]) {
       if (row[0].src === row[1].src && row[0].src === row[2].src) {
+        row[0].classList.add('winner')
+        row[1].classList.add('winner')
+        row[2].classList.add('winner')
         return "winner";
       }
     }
@@ -59,6 +62,9 @@ function gameStatus() {
         boxArray[0][i].src === boxArray[1][i].src &&
         boxArray[0][i].src === boxArray[2][i].src
       ) {
+        boxArray[0][i].classList.add('winner')
+        boxArray[1][i].classList.add('winner')
+        boxArray[2][i].classList.add('winner')
         return "winner";
       }
   }
@@ -70,6 +76,9 @@ function gameStatus() {
         boxArray[1][1].src === boxArray[0][0].src &&
         boxArray[1][1].src === boxArray[2][2].src
       ) {
+        boxArray[0][0].classList.add('winner')
+        boxArray[1][1].classList.add('winner')
+        boxArray[2][2].classList.add('winner')
         return "winner";
       }
     }
@@ -78,6 +87,9 @@ function gameStatus() {
         boxArray[1][1].src === boxArray[2][0].src &&
         boxArray[1][1].src === boxArray[0][2].src
       ) {
+        boxArray[1][1].classList.add('winner')
+        boxArray[2][0].classList.add('winner')
+        boxArray[0][2].classList.add('winner')
         return "winner";
       }
     }
@@ -101,44 +113,48 @@ function setPlayable() {
 function resetGame() {
   occupied = 0;
   currentMove = true;
-  
-  setPlayable()
 
-  document.body.removeChild(document.getElementById('gameOverDiv'))
+  setPlayable();
+
+  document.body.removeChild(document.getElementById("gameOverDiv"));
 }
 
 function gameOver(result) {
   for (let box of boxes) {
     box.classList.remove("playable");
+    if (box.firstChild) {
+      if (!box.firstChild.classList.contains('winner')) {
+      box.firstChild.classList.add('loser')
+      }
+    }
   }
 
   const gameOverText = document.createElement("span");
   gameOverText.setAttribute("id", "gameOverText");
-  
+
   if (result === "draw") {
-    gameOverText.innerText = "It's a draw, Please try again!";
+    gameOverText.innerText = "It's a draw,\n Please try again!";
   } else {
     gameOverText.innerText = `The Winner is ${
       currentMove ? "X" : "O"
     }!\nBetter Luck Next Time ${currentMove ? "O" : "X"}! `;
   }
-  
+
   const playAgainButton = document.createElement("input");
   playAgainButton.setAttribute("type", "button");
   playAgainButton.setAttribute("id", "playAgainButton");
   playAgainButton.setAttribute("value", "Play Again!");
-  playAgainButton.addEventListener('click', e => {
-    resetGame()
-  })
-  
-  const gameOverDiv = document.createElement('div')
-  gameOverDiv.setAttribute("id", "gameOverDiv")
+  playAgainButton.addEventListener("click", (e) => {
+    resetGame();
+  });
 
-  gameOverDiv.appendChild(gameOverText)
-  gameOverDiv.appendChild(playAgainButton)
-  document.body.append(gameOverDiv)
+  const gameOverDiv = document.createElement("div");
+  gameOverDiv.setAttribute("id", "gameOverDiv");
+
+  gameOverDiv.appendChild(gameOverText);
+  gameOverDiv.appendChild(playAgainButton);
+  document.body.append(gameOverDiv);
 }
-
 
 setPlayable();
 addListeners();
