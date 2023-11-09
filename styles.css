@@ -1,5 +1,5 @@
 body {
-  background-image: url("/assets/background.png");
+  background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -9,10 +9,7 @@ body {
   width: 150px;
   height: 150px;
   border: 1px solid #000;
-  transition: all 0.25s ease-in-out;
-  font-size: 85px;
   text-align: center;
-  line-height: 100px;
 }
 
 .playable {
@@ -20,19 +17,19 @@ body {
 }
 
 .container {
-  width: 456px;
+  width: max-content;
   overflow: hidden;
-  margin: 50px auto 0 auto;
-  border-radius: 1rem;
+  margin: 0 auto;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .board {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
 }
 
-span, input{
+span, input {
   display: block;
   text-align: center;
   font-size: 40px;
@@ -41,8 +38,8 @@ span, input{
 }
 
 .box > img {
-  height: 150px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
   /* border-radius: 0.5rem; */
 }
 
@@ -57,11 +54,11 @@ input {
 }
 
 body > span {
-  margin-top: 15%;
+  margin-top: 7vh;
 }
 
 .game-over {
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0;
 }
 
 #gameOverDiv {
@@ -70,4 +67,12 @@ body > span {
   background-color: #333333dd;
   border-radius: 0 0 1rem 1rem;
   width: 450px;
+}
+
+#title { 
+  background-color: #333333dd;
+  width: 456px;
+  margin-bottom: 0;
+  border-radius: 1rem 1rem 0 0;
+  padding: .75rem 0;
 }
