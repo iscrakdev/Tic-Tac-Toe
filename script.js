@@ -1,9 +1,8 @@
 const boxes = document.getElementsByClassName("box");
 let occupied = 0;
+let currentMove = true;
 
 function addListeners() {
-  let currentMove = true;
-
   for (let box of boxes)
     box.addEventListener("click", (e) => {
       const imgO = document.createElement("img");
@@ -19,17 +18,19 @@ function addListeners() {
           box.append(imgO);
         }
         box.classList.remove("playable");
-        currentMove = !currentMove;
+        
         occupied++;
 
         let gameState = gameStatus();
         if (gameState === "winner") {
-          console.log("winner");
+          console.log(`Winner is ${currentMove ? "X" : "O"}`);
         } else if (gameState === "draw") {
           console.log("draw");
         } else {
           console.log("active");
         }
+        
+        currentMove = !currentMove;
       }
     });
 }
@@ -47,10 +48,17 @@ function gameStatus() {
   ];
 
   for(let row of boxArray) {
-    if(row[0] && row[0] === row[1] && row[0] === row[2]) {
-      return "winner";
-    } 
-  } 
+    try {
+      if(row[0] && row[0].src === row[1].src && row[0].src === row[2].src) {  
+        return "winner"
+
+      }
+    } catch (error) {
+      continue;
+    }
+    
+  }
+
 
 
   // for each space
@@ -73,6 +81,7 @@ function resetGame() {
     if(box.firstChild) box.removeChild(box.firstChild)
   }
   occupied = 0;
+  currentMove = true;
 }
 
 resetGame();
