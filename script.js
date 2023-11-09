@@ -1,24 +1,25 @@
-let lastMove = null;
-
-const boxes = document.getElementsByClassName("box");
-for(let box of boxes) box.addEventListener('click', e => {
-  const imgO = document.createElement('img');
-  const imgX = document.createElement('img');
-  const box = e.target;
-  imgO.src = "./assets/O.png";
-  imgX.src = "./assets/X.png";
+function addListeners() {
+  let lastMove = null;
+  const boxes = document.getElementsByClassName("box");
   
-  if(isAvailable(box) && gameStatus() === 'active') {
-    if(lastMove === 'x') {
-      box.append(imgO);
-      lastMove = 'o';
-    } else {
-      box.append(imgX);
-      lastMove = 'x';
-    }
-  } 
-
-})
+  for(let box of boxes) box.addEventListener('click', e => {
+    const imgO = document.createElement('img');
+    const imgX = document.createElement('img');
+    const box = e.target;
+    imgO.src = "./assets/O.png";
+    imgX.src = "./assets/X.png";
+    
+    if(isAvailable(box) && gameStatus() === 'active') {
+      if(lastMove === 'x') {
+        box.append(imgO);
+        lastMove = 'o';
+      } else {
+        box.append(imgX);
+        lastMove = 'x';
+      }
+    } 
+  })
+}
 
 function isAvailable(box) {
   return box.parentNode.id === "main" ? true : false;
@@ -33,3 +34,6 @@ function gameStatus() {
   // return winner, draw, or active
   return 'active'
 }
+
+
+addListeners();
