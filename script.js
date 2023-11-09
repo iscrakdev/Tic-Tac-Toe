@@ -2,7 +2,7 @@ const boxes = document.getElementsByClassName("box");
 
 function addListeners() {
   let currentMove = true;
-  
+
   for (let box of boxes)
     box.addEventListener("click", (e) => {
       const imgO = document.createElement("img");
@@ -17,9 +17,10 @@ function addListeners() {
         } else {
           box.append(imgO);
         }
+        box.classList.remove("playable");
         currentMove = !currentMove;
 
-        let gameState = gameStatus(box, boxParentId);
+        let gameState = gameStatus();
         if (gameState === "winner") {
           console.log("winner");
         } else if (gameState === "draw") {
@@ -32,10 +33,10 @@ function addListeners() {
 }
 
 function isAvailable(box) {
-  return box.classList.contains('playable');
+  return box.classList.contains("playable");
 }
 
-function gameStatus(box, boxParentId) {
+function gameStatus() {
   let gameState = "active";
   const boxArray = [
     [boxes[0], boxes[1], boxes[2]],
@@ -56,11 +57,11 @@ function gameStatus(box, boxParentId) {
   return gameState;
 }
 
-function resetGame () {
+function resetGame() {
   for (let box of boxes) {
-    box.classList.add('playable')
+    box.classList.add("playable");
   }
 }
 
-resetGame()
+resetGame();
 addListeners();
