@@ -16,15 +16,15 @@
   margin: 50px auto 0 auto;
 }
 
-span{
-	display: block;
-	text-align: center;
-	font-size: 40px;
-	margin-bottom: 40px;
+span {
+  display: block;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
 }
 
 .box > img {
   height: 150px;
   width: 150px;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
