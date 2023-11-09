@@ -7,7 +7,10 @@
   font-size: 85px;
   text-align: center;
   line-height: 100px;
-  cursor: pointer;
+}
+
+.playable {
+    cursor: pointer;
 }
 
 .container {
@@ -21,7 +24,7 @@
     margin-right: auto;
 }
 
-span, button{
+span, input{
   display: block;
   text-align: center;
   font-size: 40px;
@@ -34,4 +37,3 @@ span, button{
   width: 150px;
   border-radius: 0.5rem;
 }
-

@@ -22,12 +22,8 @@ function addListeners() {
         occupied++;
 
         let gameState = gameStatus();
-        if (gameState === "winner") {
-          console.log(`Winner is ${currentMove ? "X" : "O"}`);
-        } else if (gameState === "draw") {
-          console.log("draw");
-        } else {
-          console.log("active");
+        if (gameState === "winner" || gameState === "draw") {
+          gameOver(gameState);
         }
 
         currentMove = !currentMove;
@@ -63,39 +59,86 @@ function gameStatus() {
         boxArray[0][i].src === boxArray[1][i].src &&
         boxArray[0][i].src === boxArray[2][i].src
       ) {
-        return 'winner'
+        return "winner";
       }
   }
 
   // Diagonal
   if (boxArray[1][1]) {
-    if(boxArray[0][0] && boxArray[2][2]) {
-      if (boxArray[1][1].src === boxArray[0][0].src && boxArray[1][1].src === boxArray[2][2].src) {
-        return 'winner'
+    if (boxArray[0][0] && boxArray[2][2]) {
+      if (
+        boxArray[1][1].src === boxArray[0][0].src &&
+        boxArray[1][1].src === boxArray[2][2].src
+      ) {
+        return "winner";
       }
     }
-    if(boxArray[2][0] && boxArray[0][2]) {
-      if (boxArray[1][1].src === boxArray[2][0].src && boxArray[1][1].src === boxArray[0][2].src) {
-        return 'winner'
+    if (boxArray[2][0] && boxArray[0][2]) {
+      if (
+        boxArray[1][1].src === boxArray[2][0].src &&
+        boxArray[1][1].src === boxArray[0][2].src
+      ) {
+        return "winner";
       }
     }
   }
 
   // Draw
   if (occupied === 9) {
-    return 'draw'
+    return "draw";
   }
+
   return gameState;
 }
 
-function resetGame() {
+function setPlayable() {
   for (let box of boxes) {
     box.classList.add("playable");
     if (box.firstChild) box.removeChild(box.firstChild);
   }
-  occupied = 0;
-  currentMove = true;
 }
 
-resetGame();
+function resetGame() {
+  occupied = 0;
+  currentMove = true;
+  
+  setPlayable()
+
+  document.body.removeChild(document.getElementById('gameOverDiv'))
+}
+
+function gameOver(result) {
+  for (let box of boxes) {
+    box.classList.remove("playable");
+  }
+
+  const gameOverText = document.createElement("span");
+  gameOverText.setAttribute("id", "gameOverText");
+  
+  if (result === "draw") {
+    gameOverText.innerText = "It's a draw, Please try again!";
+  } else {
+    gameOverText.innerText = `The Winner is ${
+      currentMove ? "X" : "O"
+    }!\nBetter Luck Next Time ${currentMove ? "O" : "X"}! `;
+  }
+  
+  const playAgainButton = document.createElement("input");
+  playAgainButton.setAttribute("type", "button");
+  playAgainButton.setAttribute("id", "playAgainButton");
+  playAgainButton.setAttribute("value", "Play Again!");
+  playAgainButton.addEventListener('click', e => {
+    resetGame()
+  })
+  
+  const gameOverDiv = document.createElement('div')
+  gameOverDiv.setAttribute("id", "gameOverDiv")
+
+  gameOverDiv.appendChild(gameOverText)
+  gameOverDiv.appendChild(playAgainButton)
+  document.body.append(gameOverDiv)
+}
+
+
+setPlayable();
 addListeners();
