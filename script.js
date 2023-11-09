@@ -18,7 +18,7 @@ function addListeners() {
           box.append(imgO);
         }
         box.classList.remove("playable");
-        
+
         occupied++;
 
         let gameState = gameStatus();
@@ -29,7 +29,7 @@ function addListeners() {
         } else {
           console.log("active");
         }
-        
+
         currentMove = !currentMove;
       }
     });
@@ -47,38 +47,51 @@ function gameStatus() {
     [boxes[6].firstChild, boxes[7].firstChild, boxes[8].firstChild],
   ];
 
-  for(let row of boxArray) {
-    try {
-      if(row[0] && row[0].src === row[1].src && row[0].src === row[2].src) {  
-        return "winner"
-
+  // Horizontal
+  for (let row of boxArray) {
+    if (row[0] && row[1] && row[2]) {
+      if (row[0].src === row[1].src && row[0].src === row[2].src) {
+        return "winner";
       }
-    } catch (error) {
-      continue;
     }
-    
   }
 
+  // Vetical
+  for (let i = 0; i < 3; i++) {
+    if (boxArray[0][i] && boxArray[1][i] && boxArray[2][i])
+      if (
+        boxArray[0][i].src === boxArray[1][i].src &&
+        boxArray[0][i].src === boxArray[2][i].src
+      ) {
+        return 'winner'
+      }
+  }
 
+  // Diagonal
+  if (boxArray[1][1]) {
+    if(boxArray[0][0] && boxArray[2][2]) {
+      if (boxArray[1][1].src === boxArray[0][0].src && boxArray[1][1].src === boxArray[2][2].src) {
+        return 'winner'
+      }
+    }
+    if(boxArray[2][0] && boxArray[0][2]) {
+      if (boxArray[1][1].src === boxArray[2][0].src && boxArray[1][1].src === boxArray[0][2].src) {
+        return 'winner'
+      }
+    }
+  }
 
-  // for each space
-  /* for the given box */
-  // check horizontal, vertical and diagonal neighbors
-
-  // if 3 consecutive matching squares, game is won
-  // else if all squares occupied, game is draw
-  /* a count variable to get to 9 squares could also return game is draw if no winner is found*/
-
-  // else game is still active
-
-  // return winner, draw, or active
+  // Draw
+  if (occupied === 9) {
+    return 'draw'
+  }
   return gameState;
 }
 
 function resetGame() {
   for (let box of boxes) {
     box.classList.add("playable");
-    if(box.firstChild) box.removeChild(box.firstChild)
+    if (box.firstChild) box.removeChild(box.firstChild);
   }
   occupied = 0;
   currentMove = true;
