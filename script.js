@@ -27,12 +27,19 @@ function addListeners() {
         }
 
         currentMove = !currentMove;
+        playerTurn();
+        
       }
     });
 }
 
 function isAvailable(box) {
   return box.classList.contains("playable");
+}
+
+function playerTurn() {
+  const turn = document.getElementById('turn');
+  turn.innerText = `${currentMove ? "X" : "O"} goes next`; 
 }
 
 function gameStatus() {
@@ -118,6 +125,10 @@ function resetGame() {
 
   document.body.removeChild(document.getElementById("gameOverDiv"));
   document.getElementById("main").classList.remove("game-over");
+  const turn = document.createElement("span");
+  turn.id = "turn";
+  turn.innerText = "X goes first"
+  document.body.appendChild(turn);
 }
 
 function gameOver(result) {
@@ -129,7 +140,8 @@ function gameOver(result) {
       }
     }
   }
-
+  const turn = document.getElementById("turn");
+  document.body.removeChild(turn);
   const gameOverText = document.createElement("span");
   gameOverText.setAttribute("id", "gameOverText");
 

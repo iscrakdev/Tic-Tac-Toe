@@ -20,7 +20,6 @@ body {
   width: max-content;
   overflow: hidden;
   margin: 0 auto;
-  border-radius: 0 0 1rem 1rem;
 }
 
 .board {
@@ -74,5 +73,13 @@ body > span {
   width: 456px;
   margin-bottom: 0;
   border-radius: 1rem 1rem 0 0;
+  padding: .75rem 0;
+}
+
+#turn {
+  background-color: #333333dd;
+  width: 456px;
+  margin-top: 0;
+  border-radius: 0 0 1rem 1rem;
   padding: .75rem 0;
 }
