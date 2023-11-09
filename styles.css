@@ -1,3 +1,9 @@
+body {
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .box {
   float: left;
   width: 150px;
@@ -17,27 +23,51 @@
   width: 456px;
   overflow: hidden;
   margin: 50px auto 0 auto;
+  border-radius: 1rem;
 }
 
 .board {
     margin-left: auto;
     margin-right: auto;
+    background-color: white;
 }
 
 span, input{
   display: block;
   text-align: center;
   font-size: 40px;
-  margin-bottom: 40px;
   margin: 20px auto 40px auto;
+  color: white;
 }
 
 .box > img {
   height: 150px;
   width: 150px;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 }
 
 .loser {
     opacity: 0.5;
+}
+
+input {
+  background-color: gray;
+  border-radius: 2rem;
+  padding: .3rem 2rem;
+}
+
+body > span {
+  margin-top: 15%;
+}
+
+.game-over {
+  border-radius: 1rem 1rem 0 0;
+}
+
+#gameOverDiv {
+  margin: 0 auto;
+  padding: .2rem;
+  background-color: #333333dd;
+  border-radius: 0 0 1rem 1rem;
+  width: 450px;
 }

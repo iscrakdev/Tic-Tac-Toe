@@ -117,6 +117,7 @@ function resetGame() {
   setPlayable();
 
   document.body.removeChild(document.getElementById("gameOverDiv"));
+  document.getElementById("main").classList.remove("game-over");
 }
 
 function gameOver(result) {
@@ -154,6 +155,7 @@ function gameOver(result) {
   gameOverDiv.appendChild(gameOverText);
   gameOverDiv.appendChild(playAgainButton);
   document.body.append(gameOverDiv);
+  document.getElementById("main").classList.add("game-over")
 }
 
 setPlayable();
